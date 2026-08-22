@@ -1,18 +1,22 @@
 # Damped-Oscillator-Laboratory
 
 ## Project Description
-A numerical simulation environment to study the physics of damped harmonic oscillators. This project models mechanical vibrations subjected to damping forces, utilizing numerical integration to analyze displacement, velocity, and energy over time.
+A numerical simulation environment to study the physics of damped harmonic oscillators. The engine solves classical equations of motion using numerical integration, calculates kinetic/potential energy, and compares findings against analytical solutions across various damping regimes.
 
 ## Physics Equation
-The core physics engine solves the classical equation of motion for a damped oscillator:
-
+The core physics engine solves:
 $$m\ddot{x} + b\dot{x} + kx = 0$$
 
+Using the damping ratio $\zeta = \frac{b}{2\sqrt{mk}}$, the laboratory classifies the system into three regimes:
+*   $\zeta < 1$: Underdamped
+*   $\zeta = 1$: Critically Damped
+*   $\zeta > 1$: Overdamped
+
 ## Features
-*   **Physics Engine:** Accurate numerical simulation using `scipy.integrate.solve_ivp`.
-*   **Energy Tracking:** Calculates continuous Kinetic, Potential, and Total Mechanical Energy.
-*   **Visualization:** Separate, detailed Matplotlib plots for displacement, velocity, and energy decay.
-*   **Validation:** Robust parameter validation to ensure physical accuracy.
+*   **Physics Engine:** Numerical simulation using `scipy.integrate.solve_ivp`.
+*   **Damping Analysis:** Automated classification of natural frequencies, discriminant, and damping ratio.
+*   **Analytical Engine:** Exact mathematical solutions modeled for absolute error comparisons.
+*   **Visualization Suite:** Extensive Matplotlib plotting for displacements, velocities, mechanical energies, and numerical-vs-analytical accuracy tests.
 
 ## Project Structure
 ```text
@@ -21,7 +25,8 @@ Damped-Oscillator-Laboratory/
 ├── requirements.txt
 ├── .gitignore
 ├── src/
-│   └── damped_oscillator.py
+│   ├── damped_oscillator.py   # Core physics engine and analytical formulas
+│   └── damping_analysis.py    # Multi-regime simulation and comparison
 ├── docs/
 │   └── theory.md
 └── results/
