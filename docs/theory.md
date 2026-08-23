@@ -28,3 +28,11 @@ The roots ($r_1, r_2$) are real and distinct. The system experiences high resist
 *   **Analytical Solution:** $x(t) = A e^{r_1 t} + B e^{r_2 t}$
 *   **Roots:** $r_{1,2} = \frac{-b \pm \sqrt{b^2 - 4mk}}{2m}$
 
+## 4. Analytical Velocity & Error Analysis
+Because velocity dictates kinetic energy and damping force, numerical differentiation introduces lag. We calculate velocity analytically natively using $v(t) = \frac{dx}{dt}$. 
+
+Numerical approximation fidelity is quantified via Absolute Error equations:
+*   **Displacement Error:** $e_x(t) = \vert{}x_{numerical}(t) - x_{analytical}(t)\vert{}$
+*   **Velocity Error:** $e_v(t) = \vert{}v_{numerical}(t) - v_{analytical}(t)\vert{}$
+
+Reducing the relative tolerance (`rtol`) in the Runge-Kutta 45 integration systematically reduces the Root Mean Square (RMS) error toward zero.
