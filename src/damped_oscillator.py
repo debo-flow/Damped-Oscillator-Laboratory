@@ -1,3 +1,8 @@
+"""
+Milestone 3: Damped Oscillator Model with Analytical Solutions
+This module simulates a damped harmonic oscillator, calculates energies, 
+computes analytical regime properties, and allows configurable solver tolerances.
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -87,13 +92,20 @@ class DampedOscillator:
         dvdt = -(self.b / self.m) * v - (self.k / self.m) * x
         return [dxdt, dvdt]
 
-    def simulate(self) -> Dict[str, np.ndarray]:
+    def simulate(self, rtol: float = 1e-3, atol: float = 1e-6, max_step: float = np.inf) -> Dict[str, np.ndarray]:
+        """
+        Runs the numerical integration. 
+        Accepts rtol and atol for convergence and error analysis.
+        """
         t_span = (0, self.duration)
         t_eval = np.linspace(0, self.duration, self.num_samples)
         y0 = [self.x0, self.v0]
 
-        sol = solve_ivp(self._ode_system, t_span, y0, t_eval=t_eval, method='RK45')
-
+        sol = solve_ivp(
+            self._ode_system, t_span, y0, t_eval=t_eval, method='RK45',
+            rtol=rtol, atol=atol, max_step=max_step
+        )
+        
         t, x, v = sol.t, sol.y[0], sol.y[1]
         kinetic_energy = 0.5 * self.m * v**2
         potential_energy = 0.5 * self.k * x**2
