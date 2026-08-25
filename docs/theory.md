@@ -32,7 +32,33 @@ The roots ($r_1, r_2$) are real and distinct. The system experiences high resist
 Because velocity dictates kinetic energy and damping force, numerical differentiation introduces lag. We calculate velocity analytically natively using $v(t) = \frac{dx}{dt}$. 
 
 Numerical approximation fidelity is quantified via Absolute Error equations:
-*   **Displacement Error:** $e_x(t) = \vert{}x_{numerical}(t) - x_{analytical}(t)\vert{}$
-*   **Velocity Error:** $e_v(t) = \vert{}v_{numerical}(t) - v_{analytical}(t)\vert{}$
+*   **Displacement Error:** $e_x(t) = |x_{numerical}(t) - x_{analytical}(t)|$
+*   **Velocity Error:** $e_v(t) = |v_{numerical}(t) - v_{analytical}(t)|$
 
 Reducing the relative tolerance (`rtol`) in the Runge-Kutta 45 integration systematically reduces the Root Mean Square (RMS) error toward zero.
+
+## 5. Phase-Space Dynamics & State-Space Formulation
+To analyze the system geometrically, we transition to **State-Space Formulation**. We define two state variables based on displacement and velocity:
+*   $x_1 = x$
+*   $x_2 = v = \dot{x}$
+
+This transforms our second-order equation into a system of two first-order equations:
+1.  $\dot{x} = v$
+2.  $\dot{v} = -\frac{b}{m}v - \frac{k}{m}x$
+
+### Phase Portraits and Equilibrium
+By plotting displacement ($x$) on the horizontal axis and velocity ($v$) on the vertical axis, we create a **Phase Portrait**. 
+The unforced damped oscillator has a single **equilibrium point** at $(x,v) = (0,0)$. Because energy is strictly decreasing due to damping, all trajectories will ultimately converge to this exact point, representing the system coming to a complete rest.
+
+*   **Underdamped:** Trajectories spiral inward toward $(0,0)$.
+*   **Critically / Overdamped:** Trajectories approach $(0,0)$ without spiraling.
+
+### Energy Contours vs. Dissipative Trajectories
+For an *undamped* oscillator, the total mechanical energy is conserved:
+$$E = \frac{1}{2}mv^2 + \frac{1}{2}kx^2 = \text{Constant}$$
+In phase space, these constant energies form closed ellipses (energy contours). However, for a *damped* system, the trajectory slices inward across these contours, visually demonstrating the continuous dissipation of energy over time.
+
+### Dimensionless Phase Space
+To compare systems with wildly different mass/spring values, we normalize the axes:
+*   **Dimensionless Displacement:** $X = \frac{x}{x_{scale}}$
+*   **Dimensionless Velocity:** $V = \frac{v}{x_{scale} \cdot \omega_0}$
