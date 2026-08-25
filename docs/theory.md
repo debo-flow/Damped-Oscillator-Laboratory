@@ -62,3 +62,21 @@ In phase space, these constant energies form closed ellipses (energy contours). 
 To compare systems with wildly different mass/spring values, we normalize the axes:
 *   **Dimensionless Displacement:** $X = \frac{x}{x_{scale}}$
 *   **Dimensionless Velocity:** $V = \frac{v}{x_{scale} \cdot \omega_0}$
+## 6. Energy Dynamics and Dissipation
+The total mechanical energy $E$ of the system is the sum of Kinetic Energy ($K$) and Potential Energy ($U$):
+*   **Kinetic Energy:** $K = \frac{1}{2}mv^2$
+*   **Potential Energy:** $U = \frac{1}{2}kx^2$
+*   **Total Mechanical Energy:** $E(t) = K(t) + U(t)$
+
+### Power and the Damping Force
+The internal forces dictating the system are the restoring spring force ($F_s = -kx$) and the damping force ($F_d = -bv$). Because the damping force resists motion, it does negative work, extracting energy from the system. The instantaneous damping power is:
+$$P_d = F_d v = -bv^2$$
+
+Consequently, the theoretical time-derivative of the mechanical energy is entirely governed by this dissipation:
+$$\frac{dE}{dt} = -bv^2$$
+
+### The Energy Balance Equation
+By integrating the damping power over time, we calculate the total energy lost as heat ($E_{diss}$). The energy balance of the system mandates that the current mechanical energy must equal the initial energy minus the dissipated energy:
+$$E(t) = E(0) - \int_0^t bv^2(\tau)d\tau$$
+
+In a numerically perfect simulation, the residual equation $R_E(t) = E(0) - E(t) - E_{diss}(t)$ will evaluate exactly to zero. Tracking $R_E(t)$ serves as a rigorous convergence metric for the underlying ODE solver.
