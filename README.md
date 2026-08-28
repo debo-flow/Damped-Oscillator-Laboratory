@@ -1,22 +1,22 @@
 # Damped-Oscillator-Laboratory
 
 ## Project Description
-A numerical simulation environment to study the physics of damped harmonic oscillators. The engine solves classical equations of motion using numerical integration, evaluates state-space geometric formulations, and tracks the exact thermodynamic dissipation of mechanical energy over time to prove conservation equations.
+A numerical simulation environment to study the physics of damped and driven harmonic oscillators. The engine solves classical equations of motion using numerical integration, evaluates state-space geometric limit cycles, and tracks precise thermodynamic power inputs and dissipations.
 
 ## Physics Equation
-The core physics engine solves:
-$$m\ddot{x} + b\dot{x} + kx = 0$$
+The core physics engine solves the non-homogeneous ODE:
+$$m\ddot{x} + b\dot{x} + kx = F_0\cos(\omega t)$$
 
 Governed by the instantaneous energy balance equation:
-$$E(t) = E(0) - \int_0^t bv^2(\tau)d\tau$$
+$$E(t) = E(0) + \int_0^t \left( F_{drive}v - bv^2 \right) d\tau$$
 
 ## Features
-*   **Physics Engine:** Numerical simulation using `scipy.integrate.solve_ivp`.
-*   **Validation Lab:** Root Mean Square (RMS) error tracking and solver convergence studies.
-*   **Phase-Space Laboratory:** Deep geometric analysis featuring $x-v$ phase portraits, stream-plot vector fields, and multi-IC trajectory comparisons.
-*   **Energy Dynamics Laboratory:** Quantitative verification of mechanical energy transformation, isolating $K$, $U$, $E$, instantaneous damping power ($P_d = -bv^2$), and rigorous numerical integration of dissipated heat.
-*   **Data Export:** Automated export of solver accuracy and thermodynamic data matrices to CSV files.
-*   **Automated Testing:** `pytest` regression suite ensuring numerical stability, undamped $b=0$ conservation limits, and mathematical accuracy.
+*   **Physics Engine:** Numerical simulation using `scipy.integrate.solve_ivp` with a modular external forcing interface.
+*   **Forced Response Analysis:** Exact mathematical modeling of superposition, isolating exponentially decaying transients from periodic steady-state limits.
+*   **Validation Lab:** Root Mean Square (RMS) error tracking and automated solver convergence testing.
+*   **Phase-Space Laboratory:** $x-v$ phase portraits capturing initial condition convergence onto steady-state limit cycles.
+*   **Energy Dynamics Laboratory:** Quantitative verification of mechanical energy transformation, isolating $P_{drive}$ and $P_{damping}$ to prove total system energy conservation.
+*   **Automated Testing:** `pytest` regression suite ensuring numerical stability, strict mathematical superposition, and unforced fallback behavior.
 
 ## Project Structure
 ```text
@@ -30,13 +30,14 @@ Damped-Oscillator-Laboratory/
 │   ├── analytical_solution.py
 │   ├── validation_lab.py
 │   ├── phase_space.py
-│   └── energy_analysis.py
+│   ├── energy_analysis.py
+│   ├── forcing.py
+│   └── forced_analysis.py
 ├── tests/
 │   ├── test_validation.py
 │   ├── test_phase_space.py
-│   └── test_energy_analysis.py
+│   ├── test_energy_analysis.py
+│   └── test_forced_oscillator.py
 ├── docs/
 │   └── theory.md
 └── results/
-    ├── validation/
-    └── energy/
