@@ -10,7 +10,7 @@ By the principle of superposition, the total analytical solution is the sum of t
 
 The steady-state displacement is given by $x_{steady}(t) = X(\omega)\cos(\omega t - \phi)$, where:
 *   **Amplitude:** $X(\omega) = \frac{F_0}{\sqrt{(k - m\omega^2)^2 + (b\omega)^2}}$
-*   **Phase Lag:** $\phi = \operatorname{atan2}(b\omega, k - m\omega^2)$
+*   **Phase Lag:** $\phi = \text{atan2}(b\omega, k - m\omega^2)$
 
 ### Forced Phase-Space and Energy
 Unlike the unforced oscillator where the trajectory spirals to a $(0,0)$ equilibrium, the forced oscillator eventually settles into a closed, periodic elliptical orbit in phase space (a **Limit Cycle**), independent of the initial starting conditions. 
