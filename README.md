@@ -1,23 +1,22 @@
 # Damped-Oscillator-Laboratory
 
 ## Project Description
-A numerical simulation environment to study the physics of damped and driven harmonic oscillators. The engine solves classical equations of motion using numerical integration, evaluates state-space geometric limit cycles, tracks precise thermodynamic power inputs, and performs exact frequency-domain resonance analysis.
+A numerical simulation environment to study the physics of damped and driven harmonic oscillators. The engine bridges time-domain integration with advanced frequency-domain spectral analysis, analyzing thermodynamic energy balancing, geometric limit cycles, and Fourier spectral properties.
 
 ## Physics Equation
 The core physics engine solves the non-homogeneous ODE:
 $$m\ddot{x} + b\dot{x} + kx = F_0\cos(\omega t)$$
 
-Steady-State Resonance Amplitude Equation:
-$$X(\omega) = \frac{F_0}{\sqrt{(k - m\omega^2)^2 + (b\omega)^2}}$$
+Which is transformed and analyzed in the spectral domain via FFT:
+$$X(f) = \mathcal{F}\{x(t)\}$$
 
 ## Features
-*   **Physics Engine:** Numerical simulation using `scipy.integrate.solve_ivp` with a modular external forcing interface.
-*   **Frequency Response Lab:** Theoretical Bode-style plots mapping Amplitude $X(\omega)$ and Phase Lag $\phi(\omega)$ across configurable logarithmic and linear frequency sweeps.
-*   **Resonance & Q-Factor Tracking:** Automated numerical refinement of resonance frequencies ($\omega_r$), half-power bandwidth limits ($\Delta\omega$), and Quality Factors ($Q$).
-*   **Time-Domain Validation:** Direct steady-state thermodynamic balancing proving $\langle P_{drive} \rangle = -\langle P_{damping} \rangle$ at resonance points.
-*   **Phase-Space Laboratory:** $x-v$ phase portraits capturing initial condition convergence onto steady-state limit cycles.
-*   **Data Export:** Automated export of solver accuracy, thermodynamic matrices, and frequency-response sweeps to CSV files.
-*   **Automated Testing:** `pytest` regression suite ensuring numerical stability, strict mathematical superposition, and bounds testing for non-resonant heavy damping scenarios.
+*   **Physics Engine:** Numerical simulation using `scipy.integrate.solve_ivp` with modular forcing.
+*   **Spectral Analysis Lab:** Fast Fourier Transform (FFT) analysis to extract one-sided amplitude spectra, phase estimates, and Power Spectral Densities (PSD).
+*   **Signal Processing Tools:** Features automated uniform-sampling validation, coherent-gain windowing (Hann, Hamming, Blackman), zero-padding for interpolation, and transient removal.
+*   **Frequency Response Lab:** Theoretical Bode sweeps verifying resonant frequencies ($\omega_r$) and Quality Factors ($Q$).
+*   **Phase-Space & Energy Lab:** Identifies limit cycles and validates that average mechanical input power balances average dissipated heat.
+*   **Automated Testing:** `pytest` regression suite ensuring numerical stability, aliasing predictability, correct $2/N$ FFT normalization, and exact frequency recovery.
 
 ## Project Structure
 ```text
@@ -33,14 +32,15 @@ Damped-Oscillator-Laboratory/
 │   ├── phase_space.py
 │   ├── energy_analysis.py
 │   ├── forcing.py
-│   ├── forced_analysis.py
-│   └── resonance_analysis.py
+│   ├── resonance_analysis.py
+│   └── spectral_analysis.py
 ├── tests/
 │   ├── test_validation.py
 │   ├── test_phase_space.py
 │   ├── test_energy_analysis.py
 │   ├── test_forced_oscillator.py
-│   └── test_resonance.py
+│   ├── test_resonance.py
+│   └── test_spectral_analysis.py
 ├── docs/
 │   └── theory.md
 └── results/
