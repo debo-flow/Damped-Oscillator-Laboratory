@@ -1,25 +1,17 @@
-## 8. Resonance and Frequency Response
-When the damped oscillator is driven by a periodic force $F_0\cos(\omega t)$, the steady-state displacement depends heavily on the driving angular frequency $\omega$.
+## 9. Frequency-Domain and Spectral Analysis
+To understand the frequency content of the oscillator, we transform the time-domain signal $x(t)$ into the frequency domain using the **Fast Fourier Transform (FFT)**:
+$$X(f) = \mathcal{F}\{x(t)\}$$
 
-### Amplitude and Phase Response
-The theoretical steady-state amplitude $X(\omega)$ and phase lag $\phi(\omega)$ are given by:
-$$X(\omega) = \frac{F_0}{\sqrt{(k - m\omega^2)^2 + (b\omega)^2}}$$
-$$\phi(\omega) = \text{atan2}(b\omega, k - m\omega^2)$$
+### Sampling Principles
+For a signal recorded over a total duration $T$ with a discrete timestep $dt$ and $N$ total samples, the fundamental parameters defining the spectrum are:
+*   **Sampling Frequency:** $f_s = \frac{1}{dt}$
+*   **Nyquist Limit:** $f_{Nyquist} = \frac{f_s}{2}$. Frequencies above this limit cannot be resolved and will "alias" (fold back) into lower frequencies.
+*   **Frequency Resolution:** $\Delta f = \frac{f_s}{N} \approx \frac{1}{T}$. To distinguish two closely spaced frequencies, the observation duration $T$ must be increased.
 
-*   **Low Frequency Limit:** As $\omega \to 0$, the system acts quasi-statically, yielding $X(0) \approx F_0 / k$.
-*   **High Frequency Limit:** As $\omega \to \infty$, inertia dominates, and the displacement amplitude approaches zero.
+### Normalization and Spectral Leakage
+For real-valued time signals, the FFT generates a symmetric spectrum. We discard the negative frequencies to create a **One-Sided Amplitude Spectrum**. To match the physical amplitude of a sine wave, the magnitude is scaled by $\frac{2}{N}$ (excluding the DC component).
 
-### Resonance Frequency
-If the damping ratio is sufficiently small ($\zeta < \frac{1}{\sqrt{2}} \approx 0.707$), the amplitude-frequency response exhibits a distinct peak. The frequency at which this maximum occurs is the **Resonance Frequency** ($\omega_r$):
-$$\omega_r = \omega_0\sqrt{1 - 2\zeta^2}$$
-Note that $\omega_r$ is always slightly lower than the natural frequency ($\omega_0$). For strongly damped systems ($\zeta \ge \frac{1}{\sqrt{2}}$), no interior amplitude peak exists, and the maximum displacement strictly occurs at $\omega = 0$.
+If a signal's frequency does not land exactly on a discrete bin integer ($k \cdot \Delta f$), the energy spreads into adjacent bins. This phenomenon is called **Spectral Leakage**. Applying **Window Functions** (e.g., Hann, Hamming, Blackman) before the FFT tapers the edges of the time signal to zero, severely reducing leakage at the cost of slightly widening the main frequency peak.
 
-### Bandwidth and Quality Factor
-The **Half-Power Frequencies** ($\omega_1, \omega_2$) occur where the amplitude drops to $X_{max} / \sqrt{2}$ (which corresponds to half the maximum power). The **Bandwidth** is the distance between them ($\Delta\omega = \omega_2 - \omega_1$). 
-The **Quality Factor** ($Q$) measures the sharpness of the resonance peak:
-$$Q = \frac{\omega_r}{\Delta\omega}$$
-For a lightly damped linear oscillator, the theoretical quality factor can be calculated directly as $Q = \frac{m\omega_0}{b}$.
-
-### Steady-State Energy Balance
-At resonance, the average mechanical power injected into the system by the driving force exactly equals the average power dissipated by the damping mechanism:
-$$\langle P_{drive} \rangle \approx -\langle P_{damping} \rangle$$
+### Power Spectral Density (PSD)
+While the FFT Amplitude Spectrum displays raw displacement (meters), the **Power Spectral Density** (often calculated via Welch's Method) represents how the power of the signal is distributed across frequencies. Welch's method computes averaged, overlapping windowed periodograms to smooth out noise in highly dynamic or stochastic signals.
