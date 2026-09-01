@@ -1,17 +1,22 @@
-## 11. Nonlinear Oscillators and Duffing Dynamics
-When the restoring force of a spring is no longer strictly proportional to displacement (Hooke's Law), the system becomes nonlinear. The canonical model is the **Duffing Oscillator**, which introduces a cubic nonlinearity $\alpha x^3$:
+## 12. Van der Pol Oscillator and Limit Cycles
+Unlike the linearly damped oscillator where energy is strictly dissipated, or the Duffing oscillator which alters the conservative restoring force, the **Van der Pol Oscillator** introduces *nonlinear damping*. The standard dimensionless equation is:
 
-$$m\ddot{x} + b\dot{x} + kx + \alpha x^3 = F(t)$$
+$$\ddot{x} - \mu(1-x^2)\dot{x} + x = 0$$
 
-### Nonlinear Restoring Force and Potential Energy
-The total restoring force is $F_{spring}(x) = -kx - \alpha x^3$. Integrating this with respect to displacement gives the nonlinear potential energy:
-$$U(x) = \frac{1}{2}kx^2 + \frac{1}{4}\alpha x^4$$
-Therefore, the total mechanical energy is $E = \frac{1}{2}mv^2 + \frac{1}{2}kx^2 + \frac{1}{4}\alpha x^4$.
+Where $\mu \ge 0$ is the control parameter governing the nonlinearity of the damping.
 
-### Hardening vs. Softening Regimes
-*   **Hardening Spring ($\alpha > 0$):** The effective stiffness increases as amplitude grows. The potential energy forms a steep "well". Oscillation frequency generally *increases* with amplitude, and resonance response curves bend toward higher frequencies.
-*   **Softening Spring ($\alpha < 0$):** The effective stiffness decreases as amplitude grows. At large displacements, the $x^4$ term dominates negatively, making the potential energy unbounded below. Global stability is lost, but stable bounded orbits can exist for small energies. The resonance curve bends toward lower frequencies.
+### Nonlinear Damping and Amplitude Regulation
+The effective damping coefficient is $-\mu(1-x^2)$. 
+*   **Small Amplitudes ($\vert{}x\vert{} < 1$):** The effective damping is negative. The system absorbs energy, making the origin $(0,0)$ a locally unstable equilibrium. Any small perturbation causes the oscillation amplitude to grow exponentially.
+*   **Large Amplitudes ($\vert{}x\vert{} > 1$):** The effective damping becomes positive. The system dissipates energy, preventing infinite amplitude growth.
 
-### Multistability, Hysteresis, and Harmonics
-Unlike linear systems, forced nonlinear oscillators can exhibit **multistability**—multiple stable steady-state amplitudes for the exact same driving frequency.
-Depending on the initial conditions (or the direction of a frequency sweep), the system may follow different response branches, occasionally exhibiting sudden **jumps** between them (hysteresis). Furthermore, a purely sinusoidal input will generate a response containing higher-order **harmonics** (e.g., $3\omega$, $5\omega$) due to the cubic distortion.
+This dynamic tension forces trajectories starting from *any* initial condition to eventually converge onto an isolated, closed, and stable phase-space trajectory called a **Limit Cycle**.
+
+### Regimes and Relaxation Oscillations
+*   **Harmonic Limit ($\mu = 0$):** Reduces to a standard conservative harmonic oscillator.
+*   **Near-Sinusoidal ($\mu \ll 1$):** The limit cycle is nearly a perfect circle in phase space, and the time-domain waveform is approximately sinusoidal with angular frequency $\omega \approx 1$.
+*   **Relaxation Oscillations ($\mu \gg 1$):** The motion becomes highly non-sinusoidal. The system experiences long, slow "relaxation" buildups followed by extremely rapid, stiff transitions (jumps) in velocity. The period of oscillation increases linearly with $\mu$.
+
+### Energy-Like Diagnostics
+Because the Van der Pol oscillator is fundamentally non-conservative, standard mechanical energy equations do not apply. Instead, we define a reference diagnostic, $E_{ref} = \frac{1}{2}v^2 + \frac{1}{2}x^2$. 
+The rate of change is $\frac{dE_{ref}}{dt} = \mu(1-x^2)v^2$. Over one fully established limit cycle, the time-averaged rate of energy injection perfectly balances the rate of energy dissipation, yielding $\langle \dot{E}_{ref} \rangle \approx 0$.
