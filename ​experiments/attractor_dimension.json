@@ -1,0 +1,7 @@
+{
+    "experiment_type": "attractor_dimension_analysis",
+    "m": 1.0, "b": 0.2, "k": -1.0, "alpha": 1.0, 
+    "F0": 0.3, "omega": 1.2, "x0": 0.1, "v0": 0.1,
+    "duration": 500.0, "transient_time": 200.0,
+    "tau_r": 1.0
+}
