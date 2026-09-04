@@ -1,22 +1,22 @@
-## 14. Quantitative Chaos and Lyapunov Exponents
-While Poincaré sections and spectral analysis provide visual evidence of complexity, **Lyapunov Exponents** provide the definitive *quantitative* measure of deterministic chaos. They measure the average rate at which two infinitesimally close trajectories separate in phase space.
+## 15. Full Lyapunov Spectrum and Attractor Geometry
+While $\lambda_{\max}$ identifies sensitive dependence, the **Full Lyapunov Spectrum** ($\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n$) provides a complete picture of phase-space stretching and contracting across all topological dimensions. 
 
-### The Largest Lyapunov Exponent ($\lambda_{\max}$)
-Given an initial perturbation $\delta \mathbf{x}(0)$, the separation between the reference and perturbed trajectory after time $t$ grows according to:
-$$\vert{}\delta \mathbf{x}(t)\vert{} \approx \vert{}\delta \mathbf{x}(0)\vert{} e^{\lambda_{\max} t}$$
-Solving for $\lambda_{\max}$ yields the limit definition:
-$$\lambda_{\max} = \lim_{t\to\infty} \frac{1}{t} \ln \frac{\vert{}\delta \mathbf{x}(t)\vert{}}{\vert{}\delta \mathbf{x}(0)\vert{}}$$
+### Tangent Space and QR Reorthonormalization
+To compute the full spectrum, we track the evolution of an entire basis of orthogonal perturbation vectors, structured as a matrix $V$. The tangent space dynamics are governed by the Jacobian:
+$$\dot{V} = J(\mathbf{x}, t) V$$
+Because all vectors naturally align with the direction of fastest growth ($\lambda_1$), $V$ rapidly becomes ill-conditioned. To prevent this, we periodically decompose the matrix into an orthogonal basis $Q$ and an upper triangular scaling matrix $R$ using **QR Decomposition** ($V = QR$).
+The spectrum is extracted by time-averaging the logarithms of the diagonal growth elements:
+$$\lambda_i = \lim_{T \to \infty} \frac{1}{T} \sum_k \ln \vert{}R_{ii}^{(k)}\vert{}$$
 
-*   **Stable Systems ($\lambda_{\max} < 0$):** Trajectories converge to a stable node or sink.
-*   **Periodic/Quasiperiodic Systems ($\lambda_{\max} \approx 0$):** Trajectories maintain their relative separation (e.g., oscillating on a limit cycle).
-*   **Chaotic Systems ($\lambda_{\max} > 0$):** Trajectories diverge exponentially. This sensitive dependence on initial conditions (the "butterfly effect") mathematically defines chaos.
+For dissipative systems, phase-space volume contracts over time, mathematically forcing the sum of all exponents to be strictly negative ($\sum \lambda_i < 0$).
 
-### Benettin's Renormalization Method
-To calculate this numerically without causing floating-point overflow (since chaotic separation grows exponentially into infinity), we must periodically renormalize the perturbation vector back to its initial tiny magnitude $\delta_0$ after a time step $\tau_r$, accumulating the log-growth at each step:
-$$\lambda_{\max} \approx \frac{1}{N\tau_r} \sum_{i=1}^{N} \ln \left( \frac{d_i}{\delta_0} \right)$$
-Where $d_i$ is the absolute separation distance prior to renormalization step $i$. 
+### The Kaplan–Yorke Dimension ($D_{KY}$)
+Chaotic dissipative systems compress state space onto infinitely detailed structures called **Strange Attractors**. The Kaplan–Yorke conjecture links the continuous Lyapunov spectrum to the attractor's fractal geometry. Finding the largest index $j$ where the cumulative sum of exponents is still positive:
+$$D_{KY} = j + \frac{\sum_{i=1}^j \lambda_i}{\vert{}\lambda_{j+1}\vert{}}$$
+This provides a non-integer dimensional representation of the attractor's geometric complexity.
 
-### Variational Foundation and The Jacobian
-Tracking the exact growth of infinitesimally small variations requires tracking the linearized dynamics along the reference trajectory:
-$$\dot{\delta\mathbf{x}} = J(\mathbf{x}, t) \delta\mathbf{x}$$
-Where $J = \frac{\partial f}{\partial \mathbf{x}}$ is the system's Jacobian matrix. This laboratory utilizes a finite-difference approximation to automatically generate $J$ for any custom user-defined oscillator.
+### Numerical Fractal Dimensions
+Complementing Lyapunov calculations, purely geometric diagnostics verify attractor topology:
+*   **Box-Counting Dimension ($D_{box}$):** Evaluates spatial occupancy by placing the attractor on a grid of size $\epsilon$ and counting occupied boxes $N(\epsilon)$. If scaling exists: $N(\epsilon) \propto \epsilon^{-D_{box}}$.
+*   **Correlation Dimension ($D_2$):** Analyzes pairwise spatial probabilities, estimating the dimension from the correlation sum $C(r)$ across length scales $r$.
+*Warning: Numerical estimation of $D_{box}$ and $D_2$ is highly sensitive to trajectory length, noise, and appropriate scale selection. A rigorous $R^2$ fit evaluation is mandatory before claiming fractal properties.*
