@@ -1,0 +1,8 @@
+{
+    "experiment_type": "basin_of_attraction",
+    "m": 1.0, "b": 0.2, "k": -1.0, "alpha": 1.0,
+    "F0": 0.3, "omega": 1.2,
+    "x_range": [-2.0, 2.0],
+    "v_range": [-2.0, 2.0],
+    "resolution": 20
+}
