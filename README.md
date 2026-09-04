@@ -1,13 +1,15 @@
 # Damped-Oscillator-Laboratory
 
 ## Project Description
-A numerical simulation environment studying the physics of linear, nonlinear, and coupled harmonic oscillators. The engine bridges discrete stroboscopic diagnostics with advanced continuous-time quantitative chaos theory, computing comprehensive Lyapunov spectrums and fractal attractor topologies.
+A numerical simulation environment studying the physics of linear, nonlinear, and coupled harmonic oscillators. The engine bridges discrete stroboscopic chaos diagnostics, full Lyapunov spectrum generation, and rigorous adaptive bifurcation continuation to trace complete global dynamical maps.
 
 ## Features
-*   **Full Lyapunov Spectrum Lab:** Integrates complete phase-space Tangent Dynamics ($\dot{V} = J(\mathbf{x}, t) V$) paired with numerical QR-Decomposition reorthonormalization to flawlessly extract ordered Lyapunov spectrums ($\lambda_1 \dots \lambda_n$).
-*   **Fractal Dimension Diagnostics:** Implements numerical scaling-region algorithms to compute topological complexities including Box-Counting ($D_{box}$), Correlation Dimension ($D_2$), and the spectrum-derived Kaplan-Yorke Dimension ($D_{KY}$).
-*   **Attractor Geometry Tracking:** Generates bounded limits, centroid RMS metrics, and memory-safe pairwise distance correlation matrices for steady-state post-transient complex attractors.
-*   **Automated Testing:** `pytest` regression suite ensuring absolute analytical boundaries. Tests QR-orthogonality limits ($\vert{}Q^TQ - I\vert{} < 10^{-10}$), Kaplan-Yorke index edge cases, and memory OOM safeguards for massive datasets.
+*   **Continuation Engine:** Adaptive forward/backward pseudo-tracking to trace stable and unstable equilibrium branches continuously across parameter sweeps.
+*   **Floquet & Monodromy Analysis:** Calculates Monodromy matrices over orbital periods to extract exact Floquet Multipliers, mathematically validating periodic orbit stabilities.
+*   **Candidate Bifurcation Detection:** Automatically flags critical topological phase transitions including Saddle-Nodes ($Re(\mu) \to 0$), Hopf crossings ($Im(\mu) \neq 0$), Torus transitions ($\vert{}\rho\vert{} \to 1$), and Period-Doubling cascades ($\rho \to -1$).
+*   **Basin of Attraction Mapping:** Automates 2D phase-space grid sampling to trace Multistability boundaries and group identical long-term geometric attractors.
+*   **Global Overlays:** Superimposes Quantitative Chaos diagnostics (Largest Lyapunov Exponents, Kaplan-Yorke Dimensions) directly onto Bifurcation stability graphs for comprehensive regime mapping.
+*   **Automated Testing:** `pytest` regression suite ensuring absolute root-finding residual limits ($< 10^{-6}$), exact Floquet-multiplier categorizations, and pitchfork eigenvalue stability reductions.
 
 ## Project Structure
 ```text
@@ -30,16 +32,21 @@ Damped-Oscillator-Laboratory/
 │   ├── van_der_pol.py
 │   ├── chaos_analysis.py
 │   ├── lyapunov_analysis.py
-│   └── attractor_analysis.py
+│   ├── attractor_analysis.py
+│   ├── bifurcation_analysis.py
+│   ├── continuation.py
+│   ├── equilibrium_analysis.py
+│   ├── periodic_orbit_analysis.py
+│   └── branch_tracking.py
 ├── experiments/
 │   ├── periodic_case.json
 │   ├── complex_case.json
-│   ├── lyapunov_validation.json
 │   ├── lyapunov_scan.json
-│   └── attractor_dimension.json
+│   ├── attractor_dimension.json
+│   ├── bifurcation_scan.json
+│   └── multistability.json
 ├── tests/
-│   ├── test_lyapunov_analysis.py
-│   ├── test_attractor_analysis.py
+│   ├── test_bifurcation_analysis.py
 │   └── (all previous tests...)
 ├── docs/
 │   └── theory.md
