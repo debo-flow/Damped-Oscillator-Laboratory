@@ -1,22 +1,17 @@
-## 15. Full Lyapunov Spectrum and Attractor Geometry
-While $\lambda_{\max}$ identifies sensitive dependence, the **Full Lyapunov Spectrum** ($\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n$) provides a complete picture of phase-space stretching and contracting across all topological dimensions. 
+## 16. Advanced Bifurcation Analysis and Continuation
+Analyzing non-linear systems requires mapping how equilibria and periodic orbits change as parameters vary—a process called **Continuation**. For a system $\dot{\mathbf{x}} = f(\mathbf{x}, p)$, we seek branches of states satisfying $f(\mathbf{x}^*, p) = 0$.
 
-### Tangent Space and QR Reorthonormalization
-To compute the full spectrum, we track the evolution of an entire basis of orthogonal perturbation vectors, structured as a matrix $V$. The tangent space dynamics are governed by the Jacobian:
-$$\dot{V} = J(\mathbf{x}, t) V$$
-Because all vectors naturally align with the direction of fastest growth ($\lambda_1$), $V$ rapidly becomes ill-conditioned. To prevent this, we periodically decompose the matrix into an orthogonal basis $Q$ and an upper triangular scaling matrix $R$ using **QR Decomposition** ($V = QR$).
-The spectrum is extracted by time-averaging the logarithms of the diagonal growth elements:
-$$\lambda_i = \lim_{T \to \infty} \frac{1}{T} \sum_k \ln \vert{}R_{ii}^{(k)}\vert{}$$
+### Equilibrium Stability and Local Bifurcations
+Stability is determined by the continuous-time eigenvalues ($\mu_i$) of the Jacobian $J(\mathbf{x}^*, p)$:
+*   **Saddle-Node Bifurcation:** Two equilibria collide and annihilate. Characterized by a purely real eigenvalue crossing zero ($Re(\mu) \to 0$, $Im(\mu) = 0$).
+*   **Hopf Bifurcation:** A stable equilibrium spawns a periodic limit cycle. Characterized by a complex conjugate pair crossing the imaginary axis ($Re(\mu) \to 0$, $Im(\mu) \neq 0$).
 
-For dissipative systems, phase-space volume contracts over time, mathematically forcing the sum of all exponents to be strictly negative ($\sum \lambda_i < 0$).
+### Periodic Orbit Stability and Floquet Theory
+For periodic orbits with period $T$, stability is governed by tracking a perturbation $\delta \mathbf{x}$ over one full cycle via the **Monodromy Matrix** $M$. The eigenvalues of $M$ are called **Floquet Multipliers** ($\rho_i$). 
+*   Stable orbits require all multipliers to lie strictly inside the unit circle ($\vert{}\rho_i\vert{} < 1$). (For autonomous continuous systems, one multiplier is always exactly $1$, representing perturbations along the phase of the orbit).
+*   **Period-Doubling Bifurcation:** A multiplier exits the unit circle along the negative real axis ($\rho \to -1$). The orbit loses stability and spawns a new orbit with twice the period ($2T$).
+*   **Neimark-Sacker (Torus) Bifurcation:** A complex conjugate pair exits the unit circle ($\vert{}\rho\vert{} \to 1$). The periodic orbit spawns a quasiperiodic Torus.
 
-### The Kaplan–Yorke Dimension ($D_{KY}$)
-Chaotic dissipative systems compress state space onto infinitely detailed structures called **Strange Attractors**. The Kaplan–Yorke conjecture links the continuous Lyapunov spectrum to the attractor's fractal geometry. Finding the largest index $j$ where the cumulative sum of exponents is still positive:
-$$D_{KY} = j + \frac{\sum_{i=1}^j \lambda_i}{\vert{}\lambda_{j+1}\vert{}}$$
-This provides a non-integer dimensional representation of the attractor's geometric complexity.
-
-### Numerical Fractal Dimensions
-Complementing Lyapunov calculations, purely geometric diagnostics verify attractor topology:
-*   **Box-Counting Dimension ($D_{box}$):** Evaluates spatial occupancy by placing the attractor on a grid of size $\epsilon$ and counting occupied boxes $N(\epsilon)$. If scaling exists: $N(\epsilon) \propto \epsilon^{-D_{box}}$.
-*   **Correlation Dimension ($D_2$):** Analyzes pairwise spatial probabilities, estimating the dimension from the correlation sum $C(r)$ across length scales $r$.
-*Warning: Numerical estimation of $D_{box}$ and $D_2$ is highly sensitive to trajectory length, noise, and appropriate scale selection. A rigorous $R^2$ fit evaluation is mandatory before claiming fractal properties.*
+### The Feigenbaum Ratio ($\delta$)
+During a period-doubling cascade leading to chaos, the parameter intervals between subsequent bifurcations shrink geometrically. The ratio of successive intervals converges to the universal Feigenbaum constant:
+$$\delta_n = \frac{p_{n-1} - p_{n-2}}{p_n - p_{n-1}} \approx 4.6692$$
