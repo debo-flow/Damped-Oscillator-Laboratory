@@ -1,0 +1,7 @@
+{
+    "experiment_type": "stable_linear_validation",
+    "m": 1.0, "b": 0.5, "k": 10.0, "alpha": 0.0, 
+    "F0": 0.0, "omega": 0.0, "x0": 1.0, "v0": 0.0,
+    "duration": 50.0, "transient_time": 0.0,
+    "expected_lyapunov_sign": "negative"
+}
