@@ -1,19 +1,13 @@
 # Damped-Oscillator-Laboratory
 
 ## Project Description
-A numerical simulation environment studying the physics of linear, nonlinear, and coupled harmonic oscillators. The engine bridges discrete stroboscopic diagnostics with advanced continuous-time quantitative chaos theory to calculate definitive mathematical classifications.
-
-## Physics Equation
-The Lyapunov analysis framework features a generic interface supporting analytical stability evaluations and highly nonlinear non-autonomous chaotic states, including the Duffing potential:
-$$m\ddot{x} + b\dot{x} + kx + \alpha x^3 = F_0\cos(\omega t)$$
+A numerical simulation environment studying the physics of linear, nonlinear, and coupled harmonic oscillators. The engine bridges discrete stroboscopic diagnostics with advanced continuous-time quantitative chaos theory, computing comprehensive Lyapunov spectrums and fractal attractor topologies.
 
 ## Features
-*   **Quantitative Chaos Lab:** Implements the continuous Benettin Renormalization algorithm to calculate Finite-Time Largest Lyapunov Exponents ($\lambda_{max}$).
-*   **Convergence Diagnostics:** Generates cumulative log-growth graphs tracing local Lyapunov fluctuations as they asymptotically converge onto their true physical value.
-*   **Jacobian Integrations:** Provides automated, finite-difference Jacobian approximations ($J = \partial f / \partial \mathbf{x}$) laying the foundation for full Lyapunov Spectrum extraction.
-*   **Parameter Bifurcation Maps:** Automates 1D Parameter scans, plotting $\lambda_{max}$ versus varying forcing amplitudes ($F_0$) to exactly pinpoint critical bifurcation phase boundaries (where $\lambda$ crosses 0).
-*   **Discrete Chaos Diagnostics:** Implements stroboscopic interpolations mapping continuous trajectories into Poincaré Sections and recurrence matrices.
-*   **Automated Testing:** `pytest` regression suite ensuring flawless positive control validations: guaranteeing strictly negative $\lambda_{max}$ for damped states, and $\lambda_{max} \approx 0$ for neutral harmonic cycles.
+*   **Full Lyapunov Spectrum Lab:** Integrates complete phase-space Tangent Dynamics ($\dot{V} = J(\mathbf{x}, t) V$) paired with numerical QR-Decomposition reorthonormalization to flawlessly extract ordered Lyapunov spectrums ($\lambda_1 \dots \lambda_n$).
+*   **Fractal Dimension Diagnostics:** Implements numerical scaling-region algorithms to compute topological complexities including Box-Counting ($D_{box}$), Correlation Dimension ($D_2$), and the spectrum-derived Kaplan-Yorke Dimension ($D_{KY}$).
+*   **Attractor Geometry Tracking:** Generates bounded limits, centroid RMS metrics, and memory-safe pairwise distance correlation matrices for steady-state post-transient complex attractors.
+*   **Automated Testing:** `pytest` regression suite ensuring absolute analytical boundaries. Tests QR-orthogonality limits ($\vert{}Q^TQ - I\vert{} < 10^{-10}$), Kaplan-Yorke index edge cases, and memory OOM safeguards for massive datasets.
 
 ## Project Structure
 ```text
@@ -35,14 +29,17 @@ Damped-Oscillator-Laboratory/
 │   ├── nonlinear_oscillators.py
 │   ├── van_der_pol.py
 │   ├── chaos_analysis.py
-│   └── lyapunov_analysis.py
+│   ├── lyapunov_analysis.py
+│   └── attractor_analysis.py
 ├── experiments/
 │   ├── periodic_case.json
 │   ├── complex_case.json
 │   ├── lyapunov_validation.json
-│   └── lyapunov_scan.json
+│   ├── lyapunov_scan.json
+│   └── attractor_dimension.json
 ├── tests/
 │   ├── test_lyapunov_analysis.py
+│   ├── test_attractor_analysis.py
 │   └── (all previous tests...)
 ├── docs/
 │   └── theory.md
