@@ -1,0 +1,10 @@
+{
+    "experiment_type": "parameter_scan",
+    "m": 1.0, "b": 0.2, "k": -1.0, "alpha": 1.0, 
+    "omega": 1.2,
+    "scan_parameter": "F0",
+    "scan_min": 0.2,
+    "scan_max": 0.4,
+    "scan_steps": 10
+}
+
