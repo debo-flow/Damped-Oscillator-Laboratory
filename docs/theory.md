@@ -1,17 +1,15 @@
-## 16. Advanced Bifurcation Analysis and Continuation
-Analyzing non-linear systems requires mapping how equilibria and periodic orbits change as parameters vary—a process called **Continuation**. For a system $\dot{\mathbf{x}} = f(\mathbf{x}, p)$, we seek branches of states satisfying $f(\mathbf{x}^*, p) = 0$.
+## 17. Global Phase-Space Structure and Invariant Manifolds
+While local linearization provides eigenvectors at an equilibrium, global dynamics are governed by **Invariant Manifolds**—nonlinear curves (or surfaces) that trajectories follow as they approach or flee fixed points over infinite time.
 
-### Equilibrium Stability and Local Bifurcations
-Stability is determined by the continuous-time eigenvalues ($\mu_i$) of the Jacobian $J(\mathbf{x}^*, p)$:
-*   **Saddle-Node Bifurcation:** Two equilibria collide and annihilate. Characterized by a purely real eigenvalue crossing zero ($Re(\mu) \to 0$, $Im(\mu) = 0$).
-*   **Hopf Bifurcation:** A stable equilibrium spawns a periodic limit cycle. Characterized by a complex conjugate pair crossing the imaginary axis ($Re(\mu) \to 0$, $Im(\mu) \neq 0$).
+### Stable and Unstable Manifolds ($W^s$, $W^u$)
+For a hyperbolic equilibrium point $\mathbf{x}^*$:
+*   **Stable Manifold ($W^s$):** The set of all initial conditions that asymptotically converge to $\mathbf{x}^*$ as $t \to +\infty$. Numerically, this is approximated by integrating the local stable eigenvector ($E^s$) *backward* in time.
+*   **Unstable Manifold ($W^u$):** The set of all initial conditions that converge to $\mathbf{x}^*$ as $t \to -\infty$. Numerically, this is approximated by integrating the local unstable eigenvector ($E^u$) *forward* in time.
 
-### Periodic Orbit Stability and Floquet Theory
-For periodic orbits with period $T$, stability is governed by tracking a perturbation $\delta \mathbf{x}$ over one full cycle via the **Monodromy Matrix** $M$. The eigenvalues of $M$ are called **Floquet Multipliers** ($\rho_i$). 
-*   Stable orbits require all multipliers to lie strictly inside the unit circle ($\vert{}\rho_i\vert{} < 1$). (For autonomous continuous systems, one multiplier is always exactly $1$, representing perturbations along the phase of the orbit).
-*   **Period-Doubling Bifurcation:** A multiplier exits the unit circle along the negative real axis ($\rho \to -1$). The orbit loses stability and spawns a new orbit with twice the period ($2T$).
-*   **Neimark-Sacker (Torus) Bifurcation:** A complex conjugate pair exits the unit circle ($\vert{}\rho\vert{} \to 1$). The periodic orbit spawns a quasiperiodic Torus.
+### Separatrices and Basin Boundaries
+In bistable systems like the Double-Well Duffing oscillator, the Stable Manifold of the central saddle point acts as a **Separatrix**—a geometric boundary separating the basins of attraction of the two stable wells. Trajectories on opposite sides of $W^s$ will ultimately fall into entirely different attractors.
 
-### The Feigenbaum Ratio ($\delta$)
-During a period-doubling cascade leading to chaos, the parameter intervals between subsequent bifurcations shrink geometrically. The ratio of successive intervals converges to the universal Feigenbaum constant:
-$$\delta_n = \frac{p_{n-1} - p_{n-2}}{p_n - p_{n-1}} \approx 4.6692$$
+### Homoclinic and Heteroclinic Connections
+*   **Homoclinic Orbit:** A trajectory that lies in both $W^u(\mathbf{x}^*)$ and $W^s(\mathbf{x}^*)$. The trajectory leaves the saddle and eventually returns to the exact same saddle, taking infinite time.
+*   **Heteroclinic Orbit:** A trajectory that connects two different saddle points ($W^u(\mathbf{x}_A^*) \cap W^s(\mathbf{x}_B^*)$).
+*Note: Due to numerical precision, we classify these as "candidates." Rigorous mathematical proof of a true intersection often requires topological methods like Melnikov integrals.*
