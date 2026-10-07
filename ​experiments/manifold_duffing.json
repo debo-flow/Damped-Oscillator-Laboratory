@@ -1,0 +1,8 @@
+{
+    "experiment_type": "invariant_manifolds",
+    "model": "duffing",
+    "m": 1.0, "b": 0.15, "k": -1.0, "alpha": 1.0,
+    "equilibrium": [0.0, 0.0],
+    "manifold_duration": 15.0,
+    "epsilon": 1e-4
+}
