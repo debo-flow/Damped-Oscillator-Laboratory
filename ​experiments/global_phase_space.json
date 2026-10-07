@@ -1,0 +1,5 @@
+{
+    "experiment_type": "global_phase_space_map",
+    "resolution": 2000,
+    "homoclinic_tolerance": 0.05
+}
