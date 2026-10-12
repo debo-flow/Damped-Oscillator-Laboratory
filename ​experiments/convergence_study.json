@@ -1,0 +1,8 @@
+{
+    "experiment_type": "convergence_analysis",
+    "model": "duffing",
+    "parameters": {"m": 1.0, "b": 0.2, "k": -1.0, "alpha": 1.0},
+    "forcing": {"F0": 0.3, "omega": 1.2},
+    "tolerances": [1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8],
+    "methods_to_compare": ["RK45", "DOP853", "Radau"]
+}
