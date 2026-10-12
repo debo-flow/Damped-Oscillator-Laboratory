@@ -1,0 +1,7 @@
+{
+    "experiment_type": "transient_chaos",
+    "model": "duffing",
+    "F0": 0.5, "omega": 1.2,
+    "boundary_threshold": 20.0,
+    "initial_conditions_count": 100
+}
