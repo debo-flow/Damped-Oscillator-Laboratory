@@ -1,0 +1,10 @@
+{
+    "experiment_type": "parameter_estimation",
+    "model": "linear_damped_oscillator",
+    "true_parameters": {"m": 1.0, "c": 0.5, "k": 10.0},
+    "initial_guess": [1.0, 1.0, 1.0],
+    "bounds": [[0.1, 0.0, 0.1], [10.0, 5.0, 50.0]],
+    "snr_db": 30.0,
+    "duration": 20.0,
+    "samples": 1000
+}
