@@ -1,0 +1,6 @@
+{
+    "experiment_type": "crisis_analysis",
+    "scan_parameter": "F0",
+    "scan_range": [0.30, 0.35],
+    "expansion_threshold": 2.5
+}
