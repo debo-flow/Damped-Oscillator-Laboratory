@@ -1,0 +1,7 @@
+{
+    "experiment_type": "intermittency",
+    "model": "duffing",
+    "scan_parameter": "F0",
+    "scan_range": [0.28, 0.32],
+    "variance_threshold": 0.5
+}
