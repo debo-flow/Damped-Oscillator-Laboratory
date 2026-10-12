@@ -1,15 +1,16 @@
-## 17. Global Phase-Space Structure and Invariant Manifolds
-While local linearization provides eigenvectors at an equilibrium, global dynamics are governed by **Invariant Manifolds**—nonlinear curves (or surfaces) that trajectories follow as they approach or flee fixed points over infinite time.
+## 18. Advanced Chaos, Crisis, and Intermittency
+While $\lambda_{\max} > 0$ indicates sensitive dependence, the global structure of chaos involves complex transitions and finite-time phenomena.
 
-### Stable and Unstable Manifolds ($W^s$, $W^u$)
-For a hyperbolic equilibrium point $\mathbf{x}^*$:
-*   **Stable Manifold ($W^s$):** The set of all initial conditions that asymptotically converge to $\mathbf{x}^*$ as $t \to +\infty$. Numerically, this is approximated by integrating the local stable eigenvector ($E^s$) *backward* in time.
-*   **Unstable Manifold ($W^u$):** The set of all initial conditions that converge to $\mathbf{x}^*$ as $t \to -\infty$. Numerically, this is approximated by integrating the local unstable eigenvector ($E^u$) *forward* in time.
+### Transient Chaos and Chaotic Saddles
+In some regimes, trajectories behave chaotically for a long time before eventually escaping to a stable periodic orbit or infinity. This indicates the presence of a **Chaotic Saddle** (a non-attracting chaotic invariant set). The survival probability of trajectories remaining in the chaotic region typically follows an exponential decay law:
+$$P(\tau > t) \approx e^{-\kappa t}$$
+Where $\kappa$ is the escape rate. The finite-time Lyapunov exponent $\lambda(t)$ will remain positive during the transient phase and drop below zero upon escape.
 
-### Separatrices and Basin Boundaries
-In bistable systems like the Double-Well Duffing oscillator, the Stable Manifold of the central saddle point acts as a **Separatrix**—a geometric boundary separating the basins of attraction of the two stable wells. Trajectories on opposite sides of $W^s$ will ultimately fall into entirely different attractors.
+### Intermittency
+**Intermittency** occurs when a system transitions between chaos and periodic behavior. A trajectory exhibits long, nearly periodic "laminar" phases interrupted by sudden, irregular chaotic "bursts". As a control parameter $\mu$ approaches the critical bifurcation value $\mu_c$ (often a Saddle-Node), the average laminar length $\langle L \rangle$ scales according to a power law:
+$$\langle L \rangle \sim |\mu - \mu_c|^{-\gamma}$$
 
-### Homoclinic and Heteroclinic Connections
-*   **Homoclinic Orbit:** A trajectory that lies in both $W^u(\mathbf{x}^*)$ and $W^s(\mathbf{x}^*)$. The trajectory leaves the saddle and eventually returns to the exact same saddle, taking infinite time.
-*   **Heteroclinic Orbit:** A trajectory that connects two different saddle points ($W^u(\mathbf{x}_A^*) \cap W^s(\mathbf{x}_B^*)$).
-*Note: Due to numerical precision, we classify these as "candidates." Rigorous mathematical proof of a true intersection often requires topological methods like Melnikov integrals.*
+### Crises
+A **Crisis** is a sudden, discontinuous change in a chaotic attractor as a parameter varies, typically caused by the attractor colliding with an unstable periodic orbit or its stable manifold.
+*   **Interior Crisis:** The chaotic attractor suddenly expands in size (e.g., variance jumps significantly).
+*   **Boundary Crisis:** The chaotic attractor touches the boundary of its basin of attraction and is instantly destroyed, transforming into a chaotic saddle (creating transient chaos).
